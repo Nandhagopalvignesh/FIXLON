@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="assests/signup-favicon.webp" type="image/x-icon">
+    <title>Signup</title>
+</head>
+<style>
+    *{
+        padding: 0%;
+        margin: 0%;
+        box-sizing: border-box;
+        font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    }
+    body{
+        height: 100vh;
+        background: url('./assests/login.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+    .container{
+        background: rgba(16, 15, 15, 0.338);
+        backdrop-filter: blur(10px);
+        width: 25%;
+        min-width:285px;
+        padding:20px 10px 20px 8px;
+        transform: translate(-50%,-50%);
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        align-items:center;
+        border-radius: 15px;
+        box-shadow: 20px 30px 25px rgba(0,0,0,0.5);
+    }
+    h1{
+        font-size: 30px;
+        text-align: center;
+        color: white;
+    }
+    form{
+        width: 80%;
+        position: relative;
+        margin: 30px ;
+        align-items: center;
+    }
+    .row{
+        width: 100%;
+        display: grid;
+        grid-template-rows: repeat(auto-fit,minmax(1fr));
+        grid-gap: 20px 30px;
+        margin-bottom: 20px;
+    }
+    label{
+        color: white;
+        font-size: 18px;
+    }
+    input{
+        width: 100%;
+        font-size: 14px;
+        font-weight: 400;
+        padding: 8px 10px;
+        border-radius: 5px;
+        border:1.2px solid #c4cae0;
+        margin-top: 5px;
+    }
+    input:focus{
+        outline: none;
+        border-color: #6f6df4;
+    }
+    button{
+        border: none;
+        padding: 10px 20px;
+        width: 150px;
+        background: linear-gradient(130deg,#6f6df4,#3e38d7);
+        color: white;
+        border-radius: 10px;
+        font-weight: bold;
+        font-size: 16px;
+        text-align: center;
+        cursor: pointer;
+        margin-top: 15px;
+    }
+    button:hover{
+        border: none;
+        padding: 10px 20px;
+        width: 150px;
+        background: linear-gradient(130deg,#3e38d7,#6f6df4,white);
+        color: white;
+        border-radius: 10px;
+        font-weight: bold;
+        font-size: 16px;
+        text-align: center;
+        cursor: pointer;
+        margin-top: 15px;
+    }
+    .button{
+        text-align: center;
+    }
+    #exist{
+        color: whitesmoke;
+        text-decoration: none;
+    }
+  </style>
+  <body>
+    <div class="container">
+        <h1>GET IN TOUCH WITH US</h1>
+        <form action="https://sheetdb.io/api/v1/ai6a34invy38k" method="post" id="sheetdb-form" onsubmit="return validatephone()">
+            <div class="row">
+                <div class="column">
+                    <label for="uname">Username</label>
+                    <input type="text" id="uname" name="name" placeholder="Enter Username here"  required   oninvalid="this.setCustomValidity('Username is reqired')" oninput="this.setCustomValidity('')" >
+                </div>
+                <div class="column">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" placeholder="your phone here" pattern="[6789][0-9]{9}" required  oninvalid="this.setCustomValidity('Phone Number is reqired')" oninput="this.setCustomValidity('')" >
+                </div>
+                <div class="column">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required >
+                </div>
+                <div class="column">
+                    <label for="re-password">Confirm Password</label>
+                    <input type="password" id="Re-password" name="repassword" placeholder="Re-Enter your password" required >
+                </div>
+            </div>
+            <div class="button">
+                <button>Submit</button>
+            </div>
+            <br><hr><br>
+            <a href="./index.html" id="exist">Existing User?</a>
+        </form>
+    </div>
+  </body>
+  <script>
+
+    function validatephone(){
+        var uname=document.getElementById('uname').value;
+        var phone=document.getElementById('phone').value;
+        var password=document.getElementById('password').value;
+        var password1=document.getElementById('Re-password').value;
+        if(uname==='' || phone==='' || password==='' || password1===''){
+            alert('login failed')
+            return false;
+        }
+        if(password.length<8 || password.length>16){
+            alert('password should be greaterthan 8 or lessthan 16')
+            return false;
+        }
+        if(password!==password1){
+            alert('password should not match')
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+    var form = document.getElementById('sheetdb-form');
+        form.addEventListener("submit", e => {
+          e.preventDefault();
+          fetch(form.action, {
+              method : "POST",
+              body: new FormData(document.getElementById("sheetdb-form")),
+          }).then(
+              response => response.json()
+          ).then((html) => {
+            window.open('index.html', '_blank');
+
+          });
+        });
+  </script>
+  </html>
